@@ -1,12 +1,12 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ onHomeClick }) => {
   return (
     <div className="flex justify-between items-center">
-      <div>
+      <a onClick={onHomeClick} className="link dim dib grow night" href="./#">
         <span className="f3 night">code</span>
         <span className="f3 day">⇆</span>
-      </div>
+      </a>
       <div className="f4">sign in</div>
     </div>
   );

@@ -1,9 +1,7 @@
 import "./App.css";
 import "tachyons";
 import Description from "./Description";
-import FeatureSelector from "./FeatureSelector";
 import Header from "./Header";
-import LanguageSelector from "./LanguageSelector";
 import React, { Component } from "react";
 import Results from "./Results";
 import SearchBar from "./SearchBar";
@@ -13,9 +11,18 @@ class App extends Component {
     super();
     this.state = {
       start: true,
+      language: "",
+      feature: "",
       results: []
     };
   }
+
+  onHomeClick = () => {
+    this.setState({
+      start: true,
+      results: []
+    });
+  };
 
   onSearch = () => {
     this.setState({ start: false });
@@ -25,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header onHomeClick={this.onHomeClick} />
         {this.state.start && <Description />}
         <SearchBar onSearch={this.onSearch} />
         <Results results={this.state.results} />
