@@ -7,7 +7,7 @@ const Header = ({ onHomeClick }) => {
         <span className="f3 night">code</span>
         <span className="f3 day">⇆</span>
       </a>
-      <div className="f4">sign in</div>
+      <div className="f4 grow">sign in</div>
     </div>
   );
 };

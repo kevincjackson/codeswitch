@@ -4,13 +4,14 @@ import Description from "./Description";
 import Header from "./Header";
 import React, { Component } from "react";
 import Results from "./Results";
+import SignIn from "./Signin";
 import SearchBar from "./SearchBar";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      start: true,
+      start: false,
       language: "",
       feature: "",
       results: []
@@ -33,9 +34,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header onHomeClick={this.onHomeClick} />
-        {this.state.start && <Description />}
-        <SearchBar onSearch={this.onSearch} />
-        <Results results={this.state.results} />
+        {
+          // {this.state.start && <Description />}
+          // <SearchBar onSearch={this.onSearch} />
+          // <Results results={this.state.results} />
+        }
+        <SignIn />
       </div>
     );
   }
