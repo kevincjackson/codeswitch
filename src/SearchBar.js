@@ -10,9 +10,9 @@ const SearchBar = ({ onSearch }) => {
         <option>Javascript</option>
       </select>
       <select className="mv1 ph1 pv2 dib">
-        <option>(feature)</option>
-        <option>All</option>
         <option>Basic</option>
+        <option>All</option>
+        <option>Fizz Buzz</option>
         <option>MergeSort</option>
       </select>
       <a

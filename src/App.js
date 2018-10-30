@@ -10,6 +10,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      user: { username: "w00tw00t" },
       errors: [],
       feature: "",
       language: "",
@@ -28,7 +29,7 @@ class App extends Component {
     } else if (this.state.route === "search_results") {
       return <div>Search Results</div>;
     } else {
-      return <div>Unkown Route</div>;
+      return <div>Unknown Route</div>;
     }
   };
 
@@ -47,11 +48,17 @@ class App extends Component {
     this.setState({ results: ["r", "e", "s"] });
   };
 
+  onUserChange = user => {
+    this.setState({ user: user });
+  };
+
   render() {
     return (
       <div className="App">
         <Header
+          user={this.state.user}
           onHomeClick={this.onHomeClick}
+          onUserChange={this.onUserChange}
           onRouteChange={this.onRouteChange}
         />
         {this.getContent()}

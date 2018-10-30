@@ -43,7 +43,7 @@ const SignIn = ({ onRouteChange }) => {
                 onRouteChange("signup");
               }}
               href="#0"
-              className="f6 link dim white-50 db grow"
+              className="f6 link dim white-50 db grow underline"
             >
               sign up
             </a>
@@ -55,4 +55,3 @@ const SignIn = ({ onRouteChange }) => {
 };
 
 export default SignIn;
-// className="b ph3 pv2 input-reset ba b--white bg-transparent grow pointer f4 dib"
