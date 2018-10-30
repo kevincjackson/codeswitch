@@ -1,13 +1,21 @@
 import React from "react";
 
-const Header = ({ onHomeClick }) => {
+const Header = ({ onHomeClick, onRouteChange }) => {
   return (
     <div className="flex justify-between items-center">
       <a onClick={onHomeClick} className="link dim dib grow night" href="./#">
         <span className="f3 night">code</span>
         <span className="f3 day">⇆</span>
       </a>
-      <div className="f4 grow">sign in</div>
+      <a
+        onClick={() => {
+          onRouteChange("signin");
+        }}
+        className="f4 dim dib link grow night"
+        href="./#"
+      >
+        sign in{" "}
+      </a>
     </div>
   );
 };
