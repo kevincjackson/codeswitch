@@ -10,11 +10,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: { username: "w00tw00t" },
+      user: { username: "kevin7" },
       errors: [],
-      feature: "",
-      language: "",
-      results: [],
+      languages: [],
+      features: [],
+      search: { feature_id: 1, language_id: 1 },
+      results: [{ content: "res1", languade_id: 1, feature_id: 1 }],
       route: "start"
     };
   }

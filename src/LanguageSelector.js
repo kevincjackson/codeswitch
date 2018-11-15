@@ -1,20 +1,8 @@
+import database from "./database";
 import React from "react";
 
 class LanguageSelector extends React.Component {
   render() {
-    var languages = [
-      "Java",
-      "C",
-      "C++",
-      "Python",
-      ".Net",
-      "C#",
-      "PHP",
-      "JS",
-      "SQL",
-      "Swift"
-    ];
-
     return (
       <div>
         <select>
