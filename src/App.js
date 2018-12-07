@@ -2,6 +2,7 @@ import "./App.css";
 import "tachyons";
 import Header from "./Header";
 import React, { Component } from "react";
+import Search from "./Search";
 import Start from "./Start";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -10,25 +11,29 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: { username: "kevin7" },
+      user: null,
       errors: [],
       languages: [],
       features: [],
-      search: { feature_id: 1, language_id: 1 },
-      results: [{ content: "res1", languade_id: 1, feature_id: 1 }],
+      query: {},
       route: "start"
     };
   }
 
   getContent = () => {
     if (this.state.route === "start") {
-      return <Start />;
+      return <Start onSearch={this.onSearch} />;
     } else if (this.state.route === "signin") {
-      return <SignIn onRouteChange={this.onRouteChange} />;
+      return (
+        <SignIn
+          loadUser={this.loadUser}
+          onRouteChange={this.onRouteChange}
+        />
+      )
     } else if (this.state.route === "signup") {
       return <SignUp />;
-    } else if (this.state.route === "search_results") {
-      return <div>Search Results</div>;
+    } else if (this.state.route === "search") {
+      return <Search query={this.query} onSearch={this.onSearch} />;
     } else {
       return <div>Unknown Route</div>;
     }
@@ -45,12 +50,18 @@ class App extends Component {
     this.setState({ route });
   };
 
-  onSearch = () => {
-    this.setState({ results: ["r", "e", "s"] });
+  onSearch = query => {
+    this.setState({
+      query: query,
+      route: "search"
+    });
   };
 
-  onUserChange = user => {
-    this.setState({ user: user });
+  loadUser = user => {
+    this.setState({
+      route: "search",
+      user: user
+    });
   };
 
   render() {
@@ -58,8 +69,8 @@ class App extends Component {
       <div className="App">
         <Header
           user={this.state.user}
+          loadUser={this.loadUser}
           onHomeClick={this.onHomeClick}
-          onUserChange={this.onUserChange}
           onRouteChange={this.onRouteChange}
         />
         {this.getContent()}

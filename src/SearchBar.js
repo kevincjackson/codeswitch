@@ -13,20 +13,20 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div>
-      <select className="mv1 ph1 pv2 dib">
+      <select multiple className="mv1 ph1 pv2 dib v-mid">
         <option>(language)</option>
         {language_options}
       </select>
-      <select className="mv1 ph1 pv2 dib">
+      <select multiple className="mv1 ph1 pv2 dib v-mid">
         {feature_options}
       </select>
-      <a
+      <button
         onClick={onSearch}
-        className="f6 link dim ba br2 ph3 pv2 ma2 dib grow night"
+        className="f6 link dim ba br2 ph3 pv2 ma2 dib grow night v-mid"
         href="./#"
       >
         go
-      </a>
+      </button>
     </div>
   );
 };

@@ -1,14 +1,13 @@
-import Description from "./Description";
 import React from "react";
 import SearchBar from "./SearchBar";
 
-const Start = ({ onSearch }) => {
+const Search = ({ onSearch }) => {
   return (
     <div>
-      <Description />
       <SearchBar onSearch={onSearch} />
+      <p>Results</p>
     </div>
-  );
+  )
 };
 
-export default Start;
+export default Search;

@@ -1,4 +1,14 @@
 const database = {
+  users: [
+    {
+      id: 1,
+      username: "kj",
+      email: "kevin@kevin.com",
+      hash: "password",
+      admin: true,
+      moderator: true
+    }
+  ],
   languages: [
     { id: 1, name: "C" },
     { id: 2, name: "Javascript" },
@@ -16,7 +26,7 @@ const database = {
       content: "/* My C comment */",
       language_id: 1,
       feature_id: 1,
-      user_id: 0,
+      user_id: 1,
       source: ""
     },
     {
@@ -24,7 +34,7 @@ const database = {
       content: "// My JS comment",
       language_id: 2,
       feature_id: 1,
-      user_id: 0,
+      user_id: 1,
       source: ""
     },
     {
@@ -32,7 +42,7 @@ const database = {
       content: "# My Python comment",
       language_id: 3,
       feature_id: 1,
-      user_id: 0,
+      user_id: 1,
       source: ""
     }
 

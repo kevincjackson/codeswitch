@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ({ onHomeClick, onRouteChange, onUserChange, user }) => {
+const Header = ({ loadUser, onHomeClick, onRouteChange, user }) => {
   const userLink = () => {
     if (!user) {
       return false;
@@ -10,7 +10,7 @@ const Header = ({ onHomeClick, onRouteChange, onUserChange, user }) => {
           <a
             className="f6 link dim br-pill ba grow ph2 pv1 mb2 mr2 dib white-10"
             href="./#"
-            onClick={() => onUserChange(null)}
+            onClick={() => loadUser(null)}
           >
             x
           </a>
@@ -23,11 +23,11 @@ const Header = ({ onHomeClick, onRouteChange, onUserChange, user }) => {
   const signInLink = () => {
     return (
       <a
+        className="f4 dim dib link grow night underline"
+        href="./#"
         onClick={() => {
           onRouteChange("signin");
         }}
-        className="f4 dim dib link grow night underline"
-        href="./#"
       >
         sign in
       </a>
@@ -38,7 +38,7 @@ const Header = ({ onHomeClick, onRouteChange, onUserChange, user }) => {
     <div className="flex justify-between items-center">
       <a onClick={onHomeClick} className="link dim dib grow night" href="./#">
         <span className="f3 night">code</span>
-        <span className="f3 day">⇆</span>
+        <span className="f3 day">switch</span>
       </a>
       {userLink() || signInLink()}
     </div>
