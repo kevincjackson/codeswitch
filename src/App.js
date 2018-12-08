@@ -11,18 +11,23 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
       errors: [],
-      languages: [],
       features: [],
-      query: {},
-      route: "start"
+      languages: [],
+      route: "start",
+      user: null
     };
   }
 
   getContent = () => {
     if (this.state.route === "start") {
-      return <Start onSearch={this.onSearch} />;
+      return (
+        <Start
+          features={this.state.features}
+          languages={this.state.languages}
+          setSearch={this.setSearch}
+        />
+      )
     } else if (this.state.route === "signin") {
       return (
         <SignIn
@@ -33,7 +38,13 @@ class App extends Component {
     } else if (this.state.route === "signup") {
       return <SignUp />;
     } else if (this.state.route === "search") {
-      return <Search query={this.query} onSearch={this.onSearch} />;
+      return (
+        <Search
+          features={this.state.features}
+          languages={this.state.languages}
+          setSearch={this.setSearch}
+        />
+      )
     } else {
       return <div>Unknown Route</div>;
     }
@@ -50,12 +61,13 @@ class App extends Component {
     this.setState({ route });
   };
 
-  onSearch = query => {
+  setSearch = (features, languages) => {
     this.setState({
-      query: query,
+      features: features,
+      languages: languages,
       route: "search"
     });
-  };
+  }
 
   loadUser = user => {
     this.setState({
@@ -74,6 +86,8 @@ class App extends Component {
           onRouteChange={this.onRouteChange}
         />
         {this.getContent()}
+        <div>(App.languages: {this.state.languages})</div>
+        <div>(App.features: {this.state.features})</div>
       </div>
     );
   }

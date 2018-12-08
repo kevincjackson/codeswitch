@@ -1,10 +1,14 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 
-const Search = ({ onSearch }) => {
+const Search = ({ features, languages, setSearch }) => {
   return (
     <div>
-      <SearchBar onSearch={onSearch} />
+      <SearchBar
+        features={features}
+        languages={languages}
+        setSearch={setSearch}
+      />
       <p>Results</p>
     </div>
   )
