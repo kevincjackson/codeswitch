@@ -86,8 +86,6 @@ class App extends Component {
           onRouteChange={this.onRouteChange}
         />
         {this.getContent()}
-        <div>(App.languages: {this.state.languages})</div>
-        <div>(App.features: {this.state.features})</div>
       </div>
     );
   }

@@ -7,8 +7,8 @@ const Start = ({ features, languages, setSearch }) => {
     <div>
       <Description />
       <SearchBar
-        features={features}
-        langauges={languages}
+        features={[]}
+        languages={[]}
         setSearch={setSearch}
       />
     </div>

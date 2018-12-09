@@ -54,6 +54,7 @@ class SearchBar extends Component {
           multiple={true}
           name="languages"
           onChange={this.onLanguageChange}
+          size="3"
           value={this.state.languages}
         >
           <option disabled>(language)</option>
@@ -65,6 +66,7 @@ class SearchBar extends Component {
           multiple={true}
           name="features"
           onChange={this.onFeatureChange}
+          size="3"
           value={this.state.features}
         >
           {feature_options}
