@@ -44,7 +44,32 @@ const database = {
       feature_id: 1,
       user_id: 1,
       source: ""
+    },
+    {
+      id: 4,
+      content: "int i = 42;",
+      language_id: 1,
+      feature_id: 2,
+      user_id: 1,
+      source: ""
+    },
+    {
+      id: 5,
+      content: "const i = 42;",
+      language_id: 2,
+      feature_id: 2,
+      user_id: 1,
+      source: ""
+    },
+    {
+      id: 6,
+      content: "i = 42",
+      language_id: 3,
+      feature_id: 2,
+      user_id: 1,
+      source: ""
     }
+
 
   ]
 };
