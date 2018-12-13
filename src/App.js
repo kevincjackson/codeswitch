@@ -16,6 +16,7 @@ class App extends Component {
       features: [],
       languages: [],
       route: "start",
+      last_route: "start",
       user: database.users[0]
     };
   }
@@ -63,7 +64,7 @@ class App extends Component {
   };
 
   setRoute = route => {
-    this.setState({ route });
+    this.setState({ last_route: this.state.route, route });
   };
 
   setSearch = (features, languages) => {

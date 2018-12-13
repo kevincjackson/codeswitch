@@ -63,11 +63,8 @@ class CodeSampleForm extends React.Component {
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <h1 className="night">new code sample</h1>
               <div className="mt3 night">
-                <label className="db fw6 lh-copy f6" htmlFor="content">
-                  Content
-                </label>
                 <textarea
-                  className="pa2 input-reset ba bg-black white w-100"
+                  className="pa2 input-reset bn w-100"
                   id="content"
                   autoFocus={true}
                   onChange={this.onContentChange}
@@ -105,9 +102,15 @@ class CodeSampleForm extends React.Component {
                 </select>
               </div>
             </fieldset>
-            <div>
+            <div className="ma3">
+              <button
+                className="bn dib f5 dim grow link mb2 mr4 night ph2 pv1 white-40"
+                onClick={() => alert("cancel()")}
+              >
+                cancel
+              </button>
               <input
-                className="b ba bw0 bg-white day f4 dib grow input-reset ph3 pointer pv2"
+                className="b ba bw0 dib f4 grow input-reset ph3 pointer pv2 bg-green white"
                 onClick={this.onCodeSampleFormSubmit}
                 value="Done"
                 type="submit"
