@@ -13,9 +13,9 @@ const SignUp = () => {
               </label>
               <input
                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                type="text"
-                name="username"
                 id="username"
+                name="username"
+                type="text"
               />
             </div>
             <div className="mt3 night">
@@ -24,9 +24,9 @@ const SignUp = () => {
               </label>
               <input
                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                type="email"
-                name="email-address"
                 id="email-address"
+                name="email-address"
+                type="email"
               />
             </div>
             <div className="mv3 night">
@@ -35,9 +35,9 @@ const SignUp = () => {
               </label>
               <input
                 className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                type="password"
-                name="password"
                 id="password"
+                name="password"
+                type="password"
               />
             </div>
             <div className="mv3 night">
@@ -55,6 +55,10 @@ const SignUp = () => {
           <div>
             <input
               className="b ba bw0 bg-white day f4 dib grow input-reset ph3 pointer pv2"
+              onClick={event => {
+                event.preventDefault();
+                alert("TODO");
+              }}
               type="submit"
               value="sign up"
             />

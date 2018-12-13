@@ -2,15 +2,11 @@ import Description from "./Description";
 import React from "react";
 import SearchBar from "./SearchBar";
 
-const Start = ({ features, languages, setSearch }) => {
+const Start = ({ feature_ids, language_ids, setSearch }) => {
   return (
     <div>
       <Description />
-      <SearchBar
-        features={[]}
-        languages={[]}
-        setSearch={setSearch}
-      />
+      <SearchBar feature_ids={[]} language_ids={[]} setSearch={setSearch} />
     </div>
   );
 };

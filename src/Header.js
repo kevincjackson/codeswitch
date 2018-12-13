@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ({ loadUser, onHomeClick, setRoute, user }) => {
+const Header = ({ setUser, onHomeClick, setRoute, user }) => {
   const userLink = () => {
     if (!user) {
       return false;
@@ -8,19 +8,20 @@ const Header = ({ loadUser, onHomeClick, setRoute, user }) => {
       return (
         <div>
           <button
-            className="f6 link dim br-pill ba grow ph2 pv1 mb2 mr2 dib day"
+            className="ba br-pill day dib dim f6 grow link ma1 ph2 pv1"
             onClick={() => setRoute("codeSampleForm")}
+            title="add code sample"
           >
             +
           </button>
           <span className="f4">{user.username}</span>
-          <a
-            className="f6 link dim br-pill ba grow ph2 pv1 mb2 mr2 dib white-10"
-            href="./#"
-            onClick={() => loadUser(null)}
+          <button
+            className="ba dib dim br-pill f6 grow link ma1 night ph2 pv1"
+            onClick={() => setUser(null)}
+            title="logout"
           >
             x
-          </a>
+          </button>
         </div>
       );
     }
@@ -28,24 +29,27 @@ const Header = ({ loadUser, onHomeClick, setRoute, user }) => {
 
   const signInLink = () => {
     return (
-      <a
+      <button
         className="f4 dim dib link grow night underline"
-        href="./#"
         onClick={() => {
           setRoute("signin");
         }}
       >
         sign in
-      </a>
+      </button>
     );
   };
 
   return (
     <div className="flex justify-between items-center">
-      <a onClick={onHomeClick} className="link dim dib grow night" href="./#">
+      <button
+        className="bn link dim dib grow night"
+        onClick={onHomeClick}
+        title="home"
+      >
         <span className="f3 night">c</span>
         <span className="f3 day">s</span>
-      </a>
+      </button>
       {userLink() || signInLink()}
     </div>
   );

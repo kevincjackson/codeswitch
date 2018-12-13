@@ -2,59 +2,64 @@ import React, { Component } from "react";
 import database from "./database";
 
 class SearchBar extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      features: props.features,
-      languages: props.languages
+      feature_ids: props.feature_ids,
+      language_ids: props.language_ids
     };
   }
 
-  onFeatureChange = (event) => {
-    const element = document.getElementsByName("features")[0];
-    const values = Array.from(element.selectedOptions).map(v=>v.value);
-    this.setState({ features: values });
-  }
+  onFeatureChange = () => {
+    const element = document.getElementsByName("feature_ids")[0];
+    const values = Array.from(element.selectedOptions).map(v => v.value);
+    this.setState({ feature_ids: values });
+  };
 
-  onLanguageChange = (event) => {
-    const element = document.getElementsByName("languages")[0];
-    const values = Array.from(element.selectedOptions).map(v=>v.value);
-    this.setState({ languages: values });
-  }
+  onLanguageChange = () => {
+    const element = document.getElementsByName("language_ids")[0];
+    const values = Array.from(element.selectedOptions).map(v => v.value);
+    this.setState({ language_ids: values });
+  };
 
-  onSubmit = (event) => {
+  onSubmit = () => {
     const { setSearch } = this.props;
-    const { features, languages } = this.state;
+    const { feature_ids, language_ids } = this.state;
 
     // Form not filled out
-    if (features.length === 0 || languages.length === 0) {
+    if (feature_ids.length === 0 || language_ids.length === 0) {
       return;
     }
 
-    setSearch(features, languages);
-  }
+    setSearch(feature_ids, language_ids);
+  };
 
   render() {
+    const language_options = database.languages.map(lang => {
+      return (
+        <option key={lang.id} value={lang.id}>
+          {lang.name}
+        </option>
+      );
+    });
 
-    const language_options = database.languages.map(lan => {
-      return <option key={lan.id} value={lan.id}>{lan.name}</option>
-    })
-
-    const feature_options = database.features.map(fea => {
-      return <option key={fea.id} value={fea.id}>{fea.name}</option>
-    })
+    const feature_options = database.features.map(feat => {
+      return (
+        <option key={feat.id} value={feat.id}>
+          {feat.name}
+        </option>
+      );
+    });
 
     return (
-
       <div>
         <select
           className="mv1 ph1 pv2 dib v-mid"
           multiple={true}
-          name="languages"
+          name="language_ids"
           onChange={this.onLanguageChange}
           size="3"
-          value={this.state.languages}
+          value={this.state.language_ids}
         >
           <option disabled>(language)</option>
           {language_options}
@@ -63,10 +68,10 @@ class SearchBar extends Component {
         <select
           className="mv1 ph1 pv2 dib v-mid"
           multiple={true}
-          name="features"
+          name="feature_ids"
           onChange={this.onFeatureChange}
           size="3"
-          value={this.state.features}
+          value={this.state.feature_ids}
         >
           {feature_options}
         </select>
@@ -77,9 +82,8 @@ class SearchBar extends Component {
         >
           go
         </button>
-
       </div>
-    )
+    );
   }
 }
 

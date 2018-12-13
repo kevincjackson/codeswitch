@@ -21,8 +21,9 @@ class SignIn extends React.Component {
   onSignInSubmit = event => {
     event.preventDefault();
 
-    // Validate the user entered something
-    const submitIsEnabled = (this.state.email && this.state.password) ? true : false
+    // Validate the user entered email, password
+    const submitIsEnabled =
+      this.state.email && this.state.password ? true : false;
     if (!submitIsEnabled) {
       return;
     }
@@ -32,7 +33,7 @@ class SignIn extends React.Component {
         user.email === this.state.email && user.hash === this.state.password
     );
     if (user) {
-      this.props.loadUser(user);
+      this.props.setUser(user);
     } else {
       alert("Oops. Incorrect login or password.");
     }
@@ -53,8 +54,8 @@ class SignIn extends React.Component {
                 <input
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   id="email"
-                  onChange={this.onEmailChange}
                   name="email"
+                  onChange={this.onEmailChange}
                   type="email"
                 />
               </div>
@@ -65,8 +66,8 @@ class SignIn extends React.Component {
                 <input
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   id="password"
-                  onChange={this.onPasswordChange}
                   name="password"
+                  onChange={this.onPasswordChange}
                   type="password"
                 />
               </div>
@@ -79,17 +80,15 @@ class SignIn extends React.Component {
                 type="submit"
               />
             </div>
-            <div className="lh-copy mt3">
-              <a
-                onClick={(event) => {
-                  event.preventDefault();
+            <div className="mt4 tc">
+              <button
+                onClick={() => {
                   setRoute("signup");
                 }}
-                href="#0"
-                className="f6 link dim white-50 db grow underline"
+                className="bn center db dim f6 mt3 grow link night underline white-50"
               >
                 sign up
-              </a>
+              </button>
             </div>
           </form>
         </main>

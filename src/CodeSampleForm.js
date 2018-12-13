@@ -12,53 +12,62 @@ class CodeSampleForm extends React.Component {
     };
   }
 
-  onCancel = (event) => {
+  onCancel = event => {
     this.props.setLastRoute();
-  }
+  };
 
-  onContentChange = (event) => {
+  onContentChange = event => {
     this.setState({ content: event.target.value });
   };
 
-  onFeatureChange = (event) => {
-    const element = document.getElementsByName("features")[0];
-    const value = Array.from(element.selectedOptions).map(v=>v.value);
+  onFeatureChange = event => {
+    const element = document.getElementsByName("featureSelector")[0];
+    const value = Array.from(element.selectedOptions).map(v => v.value);
     this.setState({ feature_id: value });
-  }
+  };
 
-  onLanguageChange = (event) => {
-    const element = document.getElementsByName("languages")[0];
-    const value = Array.from(element.selectedOptions).map(v=>v.value);
+  onLanguageChange = event => {
+    const element = document.getElementsByName("languageSelector")[0];
+    const value = Array.from(element.selectedOptions).map(v => v.value);
     this.setState({ language_id: value });
-  }
+  };
 
-  onCodeSampleFormSubmit = (event) => {
+  onCodeSampleFormSubmit = event => {
     event.preventDefault();
 
-    // Validate non-blank code, language, feature, and user.
+    // Validate code, language, feature, and user is non-blank
     const submitIsEnabled =
-      (this.state.content && this.state.feature_id && this.state.language_id && this.state.user
-) ? true : false;
+      this.state.content &&
+      this.state.feature_id &&
+      this.state.language_id &&
+      this.state.user
+        ? true
+        : false;
     if (!submitIsEnabled) {
-      alert("Ooops! Missing something.")
+      alert("Ooops! Missing something.");
       return;
     } else {
       alert("Awesome. Looks good.");
       return;
     }
-  }
+  };
 
   render() {
+    const language_options = database.languages.map(lang => {
+      return (
+        <option key={lang.id} value={lang.id}>
+          {lang.name}
+        </option>
+      );
+    });
 
-    const { setRoute } = this.props;
-
-    const language_options = database.languages.map(lan => {
-      return <option key={lan.id} value={lan.id}>{lan.name}</option>
-    })
-
-    const feature_options = database.features.map(fea => {
-      return <option key={fea.id} value={fea.id}>{fea.name}</option>
-    })
+    const feature_options = database.features.map(feat => {
+      return (
+        <option key={feat.id} value={feat.id}>
+          {feat.name}
+        </option>
+      );
+    });
 
     return (
       <div>
@@ -68,22 +77,25 @@ class CodeSampleForm extends React.Component {
               <h1 className="night">new code sample</h1>
               <div className="mt3 night">
                 <textarea
+                  autoFocus={true}
                   className="pa2 input-reset bn w-100"
                   id="content"
-                  autoFocus={true}
-                  onChange={this.onContentChange}
                   name="content"
+                  onChange={this.onContentChange}
                   placeholder="your awesome code"
                   rows="20"
                 />
               </div>
               <div>
-                <label className="di fw6 lh-copy f6 pa2 white" htmlFor="language">
+                <label
+                  className="di fw6 lh-copy f6 pa2 white"
+                  htmlFor="language"
+                >
                   Language
                 </label>
                 <select
                   className="mv1 ph1 pv2 dib v-mid"
-                  name="languages"
+                  name="languageSelector"
                   onChange={this.onLanguageChange}
                   value={this.state.language_id}
                 >
@@ -92,12 +104,15 @@ class CodeSampleForm extends React.Component {
                 </select>
               </div>
               <div>
-                <label className="di fw6 lh-copy f6 pa2 white" htmlFor="feature">
+                <label
+                  className="di fw6 lh-copy f6 pa2 white"
+                  htmlFor="feature"
+                >
                   Feature
                 </label>
                 <select
                   className="mv1 ph1 pv2 dib v-mid"
-                  name="features"
+                  name="featureSelector"
                   onChange={this.onFeatureChange}
                   value={this.state.feature_id}
                 >
@@ -106,18 +121,18 @@ class CodeSampleForm extends React.Component {
                 </select>
               </div>
             </fieldset>
-            <div className="ma3">
+            <div className="ma1">
               <button
-                className="bn dib f5 dim grow link mb2 mr4 night ph2 pv1 white-40"
+                className="bn dib f5 dim grow link mb2 mr4 night ph2 pv1 underline white-40"
                 onClick={this.onCancel}
               >
                 cancel
               </button>
               <input
-                className="b ba bw0 dib f4 grow input-reset ph3 pointer pv2 bg-green white"
+                className="b ba bw0 dib f5 grow input-reset ph3 pointer pv2 bg-green white"
                 onClick={this.onCodeSampleFormSubmit}
-                value="Done"
                 type="submit"
+                value="Done"
               />
             </div>
           </form>

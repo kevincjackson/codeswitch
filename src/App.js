@@ -6,17 +6,17 @@ import Search from "./Search";
 import Start from "./Start";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import database from "./database"
+import database from "./database";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       errors: [],
-      features: [],
-      languages: [],
-      route: "start",
+      feature_ids: [],
+      language_ids: [],
       last_route: "start",
+      route: "start",
       user: database.users[0]
     };
   }
@@ -24,33 +24,31 @@ class App extends Component {
   getContent = () => {
     if (this.state.route === "codeSampleForm") {
       return (
-        <CodeSampleForm user={this.state.user} setLastRoute={this.setLastRoute} />
-      )
+        <CodeSampleForm
+          setLastRoute={this.setLastRoute}
+          user={this.state.user}
+        />
+      );
     } else if (this.state.route === "start") {
       return (
         <Start
-          features={this.state.features}
-          languages={this.state.languages}
+          feature_ids={this.state.feature_ids}
+          language_ids={this.state.language_ids}
           setSearch={this.setSearch}
         />
-      )
+      );
     } else if (this.state.route === "signin") {
-      return (
-        <SignIn
-          loadUser={this.loadUser}
-          setRoute={this.setRoute}
-        />
-      )
+      return <SignIn setUser={this.setUser} setRoute={this.setRoute} />;
     } else if (this.state.route === "signup") {
       return <SignUp />;
     } else if (this.state.route === "search") {
       return (
         <Search
-          features={this.state.features}
-          languages={this.state.languages}
+          feature_ids={this.state.feature_ids}
+          language_ids={this.state.language_ids}
           setSearch={this.setSearch}
         />
-      )
+      );
     } else {
       return <div>Unknown Route</div>;
     }
@@ -71,15 +69,15 @@ class App extends Component {
     this.setState({ route: this.state.last_route });
   };
 
-  setSearch = (features, languages) => {
+  setSearch = (feature_ids, language_ids) => {
     this.setState({
-      features: features,
-      languages: languages,
+      feature_ids: feature_ids,
+      language_ids: language_ids,
       route: "search"
     });
-  }
+  };
 
-  loadUser = user => {
+  setUser = user => {
     this.setState({
       route: "search",
       user: user
@@ -90,10 +88,10 @@ class App extends Component {
     return (
       <div className="tc">
         <Header
-          user={this.state.user}
-          loadUser={this.loadUser}
           onHomeClick={this.onHomeClick}
           setRoute={this.setRoute}
+          setUser={this.setUser}
+          user={this.state.user}
         />
         {this.getContent()}
       </div>

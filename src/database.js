@@ -69,8 +69,6 @@ const database = {
       user_id: 1,
       source: ""
     }
-
-
   ]
 };
 

@@ -2,24 +2,28 @@ import CodeSample from "./CodeSample";
 import React from "react";
 import SearchBar from "./SearchBar";
 
-const Search = ({ features, languages, setSearch }) => {
-
+const Search = ({ feature_ids, language_ids, setSearch }) => {
   return (
     <div>
       <SearchBar
-        features={features}
-        languages={languages}
+        feature_ids={feature_ids}
+        language_ids={language_ids}
         setSearch={setSearch}
       />
-      {features.map((feature, index) => {
-
+      {feature_ids.map((feat, index) => {
         return (
           <div
             key={index}
             className="flex flex-wrap ma3 items-start justify-center"
           >
-            {languages.map((language, index) => {
-              return <CodeSample key={index} feature_id={feature} language_id={language} />;
+            {language_ids.map((lang, index) => {
+              return (
+                <CodeSample
+                  key={index}
+                  feature_id={feat}
+                  language_id={lang}
+                />
+              );
             })}
           </div>
         );
