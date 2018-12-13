@@ -12,7 +12,11 @@ class CodeSampleForm extends React.Component {
     };
   }
 
-  onContentChange = event => {
+  onCancel = (event) => {
+    this.props.setLastRoute();
+  }
+
+  onContentChange = (event) => {
     this.setState({ content: event.target.value });
   };
 
@@ -105,7 +109,7 @@ class CodeSampleForm extends React.Component {
             <div className="ma3">
               <button
                 className="bn dib f5 dim grow link mb2 mr4 night ph2 pv1 white-40"
-                onClick={() => alert("cancel()")}
+                onClick={this.onCancel}
               >
                 cancel
               </button>

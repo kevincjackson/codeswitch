@@ -24,7 +24,7 @@ class App extends Component {
   getContent = () => {
     if (this.state.route === "codeSampleForm") {
       return (
-        <CodeSampleForm user={this.state.user} />
+        <CodeSampleForm user={this.state.user} setLastRoute={this.setLastRoute} />
       )
     } else if (this.state.route === "start") {
       return (
@@ -65,6 +65,10 @@ class App extends Component {
 
   setRoute = route => {
     this.setState({ last_route: this.state.route, route });
+  };
+
+  setLastRoute = () => {
+    this.setState({ route: this.state.last_route });
   };
 
   setSearch = (features, languages) => {
