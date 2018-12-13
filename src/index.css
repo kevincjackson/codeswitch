@@ -8,10 +8,11 @@ body {
   color: white;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} */
+}
 
 pre {
   background-color: #272727;

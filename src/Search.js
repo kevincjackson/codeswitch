@@ -1,7 +1,6 @@
 import CodeSample from "./CodeSample";
 import React from "react";
 import SearchBar from "./SearchBar";
-import database from "./database";
 
 const Search = ({ features, languages, setSearch }) => {
 

@@ -7,7 +7,8 @@ class CodeSampleForm extends React.Component {
     this.state = {
       content: "",
       feature_id: "",
-      language_id: ""
+      language_id: "",
+      user: this.props.user
     };
   }
 
@@ -26,29 +27,26 @@ class CodeSampleForm extends React.Component {
     const value = Array.from(element.selectedOptions).map(v=>v.value);
     this.setState({ language_id: value });
   }
-  // onSignInSubmit = event => {
-  //   event.preventDefault();
-  //
-  //   // Validate the user entered something
-  //   const submitIsEnabled = (this.state.email && this.state.password) ? true : false
-  //   if (!submitIsEnabled) {
-  //     return;
-  //   }
-  //
-  //   const user = database.users.find(
-  //     user =>
-  //       user.email === this.state.email && user.hash === this.state.password
-  //   );
-  //   if (user) {
-  //     this.props.loadUser(user);
-  //   } else {
-  //     alert("Oops. Incorrect login or password.");
-  //   }
-  // };
+
+  onCodeSampleFormSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate non-blank code, language, feature, and user.
+    const submitIsEnabled =
+      (this.state.content && this.state.feature_id && this.state.language_id && this.state.user
+) ? true : false;
+    if (!submitIsEnabled) {
+      alert("Ooops! Missing something.")
+      return;
+    } else {
+      alert("Awesome. Looks good.");
+      return;
+    }
+  }
 
   render() {
 
-    const { onRouteChange } = this.props;
+    const { setRoute } = this.props;
 
     const language_options = database.languages.map(lan => {
       return <option key={lan.id} value={lan.id}>{lan.name}</option>
@@ -64,7 +62,6 @@ class CodeSampleForm extends React.Component {
           <form className="measure center" onChange={this.onFormChange}>
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <h1 className="night">new code sample</h1>
-
               <div className="mt3 night">
                 <label className="db fw6 lh-copy f6" htmlFor="content">
                   Content
@@ -72,14 +69,15 @@ class CodeSampleForm extends React.Component {
                 <textarea
                   className="pa2 input-reset ba bg-black white w-100"
                   id="content"
-                  autoFocus={true} 
+                  autoFocus={true}
                   onChange={this.onContentChange}
                   name="content"
+                  placeholder="your awesome code"
                   rows="20"
                 />
               </div>
               <div>
-                <label className="db fw6 lh-copy f6 white" htmlFor="language">
+                <label className="di fw6 lh-copy f6 pa2 white" htmlFor="language">
                   Language
                 </label>
                 <select
@@ -93,7 +91,7 @@ class CodeSampleForm extends React.Component {
                 </select>
               </div>
               <div>
-                <label className="db fw6 lh-copy f6 white" htmlFor="feature">
+                <label className="di fw6 lh-copy f6 pa2 white" htmlFor="feature">
                   Feature
                 </label>
                 <select
@@ -110,7 +108,7 @@ class CodeSampleForm extends React.Component {
             <div>
               <input
                 className="b ba bw0 bg-white day f4 dib grow input-reset ph3 pointer pv2"
-                onClick={() => alert(this.state.content)}
+                onClick={this.onCodeSampleFormSubmit}
                 value="Done"
                 type="submit"
               />

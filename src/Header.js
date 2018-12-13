@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ({ loadUser, onHomeClick, onRouteChange, user }) => {
+const Header = ({ loadUser, onHomeClick, setRoute, user }) => {
   const userLink = () => {
     if (!user) {
       return false;
@@ -9,7 +9,7 @@ const Header = ({ loadUser, onHomeClick, onRouteChange, user }) => {
         <div>
           <button
             className="f6 link dim br-pill ba grow ph2 pv1 mb2 mr2 dib day"
-            onClick={() => onRouteChange("codeSampleForm")}
+            onClick={() => setRoute("codeSampleForm")}
           >
             +
           </button>
@@ -32,7 +32,7 @@ const Header = ({ loadUser, onHomeClick, onRouteChange, user }) => {
         className="f4 dim dib link grow night underline"
         href="./#"
         onClick={() => {
-          onRouteChange("signin");
+          setRoute("signin");
         }}
       >
         sign in

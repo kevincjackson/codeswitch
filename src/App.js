@@ -1,4 +1,3 @@
-import "./App.css";
 import "tachyons";
 import CodeSampleForm from "./CodeSampleForm";
 import Header from "./Header";
@@ -24,7 +23,7 @@ class App extends Component {
   getContent = () => {
     if (this.state.route === "codeSampleForm") {
       return (
-        <CodeSampleForm />
+        <CodeSampleForm user={this.state.user} />
       )
     } else if (this.state.route === "start") {
       return (
@@ -38,7 +37,7 @@ class App extends Component {
       return (
         <SignIn
           loadUser={this.loadUser}
-          onRouteChange={this.onRouteChange}
+          setRoute={this.setRoute}
         />
       )
     } else if (this.state.route === "signup") {
@@ -63,7 +62,7 @@ class App extends Component {
     });
   };
 
-  onRouteChange = route => {
+  setRoute = route => {
     this.setState({ route });
   };
 
@@ -84,12 +83,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="tc">
         <Header
           user={this.state.user}
           loadUser={this.loadUser}
           onHomeClick={this.onHomeClick}
-          onRouteChange={this.onRouteChange}
+          setRoute={this.setRoute}
         />
         {this.getContent()}
       </div>

@@ -39,7 +39,7 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { onRouteChange } = this.props;
+    const { setRoute } = this.props;
     return (
       <div>
         <main className="pa4 black-80">
@@ -83,7 +83,7 @@ class SignIn extends React.Component {
               <a
                 onClick={(event) => {
                   event.preventDefault();
-                  onRouteChange("signup");
+                  setRoute("signup");
                 }}
                 href="#0"
                 className="f6 link dim white-50 db grow underline"
