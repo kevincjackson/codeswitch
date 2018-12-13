@@ -1,11 +1,13 @@
 import "./App.css";
 import "tachyons";
+import CodeSampleForm from "./CodeSampleForm";
 import Header from "./Header";
 import React, { Component } from "react";
 import Search from "./Search";
 import Start from "./Start";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import database from "./database"
 
 class App extends Component {
   constructor() {
@@ -15,12 +17,16 @@ class App extends Component {
       features: [],
       languages: [],
       route: "start",
-      user: null
+      user: database.users[0]
     };
   }
 
   getContent = () => {
-    if (this.state.route === "start") {
+    if (this.state.route === "codeSampleForm") {
+      return (
+        <CodeSampleForm />
+      )
+    } else if (this.state.route === "start") {
       return (
         <Start
           features={this.state.features}

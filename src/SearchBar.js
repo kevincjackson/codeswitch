@@ -37,7 +37,6 @@ class SearchBar extends Component {
 
   render() {
 
-
     const language_options = database.languages.map(lan => {
       return <option key={lan.id} value={lan.id}>{lan.name}</option>
     })
@@ -47,8 +46,8 @@ class SearchBar extends Component {
     })
 
     return (
-      <div>
 
+      <div>
         <select
           className="mv1 ph1 pv2 dib v-mid"
           multiple={true}

@@ -31,7 +31,7 @@ const database = {
     },
     {
       id: 2,
-      content: "// My JS comment\n // A Second comment.",
+      content: "// My single line comment\n\n/* My\n multiline\ncomment */",
       language_id: 2,
       feature_id: 1,
       user_id: 1,
