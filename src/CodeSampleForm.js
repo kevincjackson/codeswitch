@@ -32,24 +32,23 @@ class CodeSampleForm extends React.Component {
     this.setState({ language_id: value });
   };
 
-  onCodeSampleFormSubmit = event => {
-    event.preventDefault();
+  onSubmit = event => {
+    const { content, feature_id, language_id, user } = this.state;
 
-    // Validate code, language, feature, and user is non-blank
-    const submitIsEnabled =
-      this.state.content &&
-      this.state.feature_id &&
-      this.state.language_id &&
-      this.state.user
-        ? true
-        : false;
-    if (!submitIsEnabled) {
-      alert("Ooops! Missing something.");
-      return;
-    } else {
-      alert("Awesome. Looks good.");
+    // Client Validation
+    // Validates non-blanks
+    if (!content || !feature_id || !language_id) {
       return;
     }
+
+    // Validate user
+    if (!user) {
+      alert("Ooop! Please sign in or sign up first.")
+      return;
+    }
+
+    // Success
+    alert("Yay! Looks good.");
   };
 
   render() {
@@ -72,8 +71,8 @@ class CodeSampleForm extends React.Component {
     return (
       <div>
         <main className="pa4 black-80">
-          <form className="measure center" onChange={this.onFormChange}>
-            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+          <div className="measure-wide center">
+            <fieldset id="code-sample-form" className="ba b--transparent ph0 mh0">
               <h1 className="night">new code sample</h1>
               <div className="mt3 night">
                 <textarea
@@ -130,12 +129,12 @@ class CodeSampleForm extends React.Component {
               </button>
               <input
                 className="b ba bw0 dib f5 grow input-reset ph3 pointer pv2 bg-green white"
-                onClick={this.onCodeSampleFormSubmit}
+                onClick={this.onSubmit}
                 type="submit"
                 value="Done"
               />
             </div>
-          </form>
+          </div>
         </main>
       </div>
     );

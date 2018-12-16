@@ -40,7 +40,7 @@ class App extends Component {
     } else if (this.state.route === "signin") {
       return <SignIn setUser={this.setUser} setRoute={this.setRoute} />;
     } else if (this.state.route === "signup") {
-      return <SignUp />;
+      return <SignUp setUser={this.setUser}/>;
     } else if (this.state.route === "search") {
       return (
         <Search

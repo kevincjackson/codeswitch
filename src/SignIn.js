@@ -1,5 +1,5 @@
 import React from "react";
-import database from "./database";
+const server = "http://localhost:3000";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -19,24 +19,31 @@ class SignIn extends React.Component {
   };
 
   onSignInSubmit = event => {
-    event.preventDefault();
-
-    // Validate the user entered email, password
-    const submitIsEnabled =
-      this.state.email && this.state.password ? true : false;
-    if (!submitIsEnabled) {
+    // Client Validation
+    const valid = this.state.email && this.state.password;
+    if (!valid) {
       return;
     }
 
-    const user = database.users.find(
-      user =>
-        user.email === this.state.email && user.hash === this.state.password
-    );
-    if (user) {
-      this.props.setUser(user);
-    } else {
-      alert("Oops. Incorrect login or password.");
-    }
+    // Request object
+    const req = {
+      body: JSON.stringify(this.state),
+      headers: { 'Content-Type': 'application/json' },
+      method: "post"
+    };
+
+    // Authenticate
+    fetch(server + "/signin", req)
+      .then(res => res.json())
+      .then(user => {
+        if (user.id) {
+          this.props.setUser(user);
+        } else {
+          alert("Ooops! Login failed.")
+        }
+        return;
+      })
+      .catch(err => alert("Doh! Network error."));
   };
 
   render() {
@@ -44,7 +51,7 @@ class SignIn extends React.Component {
     return (
       <div>
         <main className="pa4 black-80">
-          <form className="measure center" onChange={this.onFormChange}>
+          <div className="measure center">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <h1 className="night">sign in</h1>
               <div className="mt3 night">
@@ -90,7 +97,7 @@ class SignIn extends React.Component {
                 sign up
               </button>
             </div>
-          </form>
+          </div>
         </main>
       </div>
     );
