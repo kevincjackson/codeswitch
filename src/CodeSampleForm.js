@@ -13,7 +13,7 @@ class CodeSampleForm extends React.Component {
   }
 
   onCancel = event => {
-    this.props.setLastRoute();
+    this.props.setRoute("start");
   };
 
   onContentChange = event => {

@@ -24,10 +24,16 @@ const database = {
     {
       id: 1,
       content: "/* My C comment */",
-      language_id: 1,
       feature_id: 1,
+      language_id: 1,
+      source: "",
       user_id: 1,
-      source: ""
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     },
     {
       id: 2,
@@ -35,7 +41,13 @@ const database = {
       language_id: 2,
       feature_id: 1,
       user_id: 1,
-      source: ""
+      source: "",
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     },
     {
       id: 3,
@@ -43,7 +55,13 @@ const database = {
       language_id: 3,
       feature_id: 1,
       user_id: 1,
-      source: ""
+      source: "",
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     },
     {
       id: 4,
@@ -51,7 +69,13 @@ const database = {
       language_id: 1,
       feature_id: 2,
       user_id: 1,
-      source: ""
+      source: "",
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     },
     {
       id: 5,
@@ -59,7 +83,13 @@ const database = {
       language_id: 2,
       feature_id: 2,
       user_id: 1,
-      source: ""
+      source: "",
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     },
     {
       id: 6,
@@ -67,7 +97,13 @@ const database = {
       language_id: 3,
       feature_id: 2,
       user_id: 1,
-      source: ""
+      source: "",
+      correctness_upvotes: [1,2,3,4],
+      correctness_downvotes: [4],
+      design_upvotes: [1,2],
+      design_downvotes: [],
+      style_upvotes: [2,3],
+      style_downvotes: [5]
     }
   ]
 };

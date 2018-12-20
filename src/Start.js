@@ -6,7 +6,7 @@ const Start = ({ feature_ids, language_ids, setSearch }) => {
   return (
     <div>
       <Description />
-      <SearchBar feature_ids={[]} language_ids={[]} setSearch={setSearch} />
+      <SearchBar feature_ids={feature_ids} language_ids={language_ids} setSearch={setSearch} />
     </div>
   );
 };

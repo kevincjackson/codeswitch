@@ -1,5 +1,7 @@
 import "tachyons";
 import CodeSampleForm from "./CodeSampleForm";
+import FeatureForm from "./FeatureForm";
+import LanguageForm from "./LanguageForm";
 import Header from "./Header";
 import React, { Component } from "react";
 import Search from "./Search";
@@ -25,7 +27,21 @@ class App extends Component {
     if (this.state.route === "codeSampleForm") {
       return (
         <CodeSampleForm
-          setLastRoute={this.setLastRoute}
+          setRoute={this.setRoute}
+          user={this.state.user}
+        />
+      );
+    } else if (this.state.route === "featureForm") {
+      return (
+        <FeatureForm
+          setRoute={this.setRoute}
+          user={this.state.user}
+        />
+      );
+    } else if (this.state.route === "languageForm") {
+      return (
+        <LanguageForm
+          setRoute={this.setRoute}
           user={this.state.user}
         />
       );
@@ -62,11 +78,16 @@ class App extends Component {
   };
 
   setRoute = route => {
-    this.setState({ last_route: this.state.route, route });
+    this.setState({
+      last_route: this.state.route,
+      route: route
+    });
   };
 
   setLastRoute = () => {
-    this.setState({ route: this.state.last_route });
+    if (this.route !== this.last_route) {
+      this.setState({ route: this.state.last_route });
+    }
   };
 
   setSearch = (feature_ids, language_ids) => {

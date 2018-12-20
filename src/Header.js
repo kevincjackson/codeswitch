@@ -9,16 +9,30 @@ const Header = ({ setUser, onHomeClick, setRoute, user }) => {
         <div>
           <button
             className="ba br-pill day dib dim f6 grow link ma1 ph2 pv1"
-            onClick={() => setRoute("codeSampleForm")}
-            title="add code sample"
+            onClick={() => setRoute("languageForm")}
+            title="Add Language"
           >
-            +
+            +L
+          </button>
+          <button
+            className="ba br-pill day dib dim f6 grow link ma1 ph2 pv1"
+            onClick={() => setRoute("featureForm")}
+            title="Add Feature"
+          >
+            +F
+          </button>
+          <button
+            className="ba br-pill day dib dim f6 grow link ma1 ph2 pv1"
+            onClick={() => setRoute("codeSampleForm")}
+            title="Add Code Sample"
+          >
+            +C
           </button>
           <span className="f4">{user.username}</span>
           <button
             className="ba dib dim br-pill f6 grow link ma1 night ph2 pv1"
             onClick={() => setUser(null)}
-            title="logout"
+            title="Logout"
           >
             x
           </button>

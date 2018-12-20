@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 const server = "http://localhost:3000";
 
-class SearchBar extends Component {
+class LanguageFeatureSelectors extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,13 +86,6 @@ class SearchBar extends Component {
         >
           {feature_options}
         </select>
-
-        <button
-          onClick={this.onSubmit}
-          className="f6 link dim ba br2 ph3 pv2 ma2 dib grow night v-mid"
-        >
-          go
-        </button>
       </div>
     );
   }
