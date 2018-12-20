@@ -72,7 +72,6 @@ class SearchBar extends Component {
           size="3"
           value={this.state.language_ids}
         >
-          <option disabled>(language)</option>
           {language_options}
         </select>
 

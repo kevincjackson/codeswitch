@@ -1,5 +1,5 @@
 import React from "react";
-import database from "./database";
+const server = "http://localhost:3000";
 
 class CodeSampleForm extends React.Component {
   constructor(props) {
@@ -7,9 +7,21 @@ class CodeSampleForm extends React.Component {
     this.state = {
       content: "",
       feature_id: "",
+      features: [],
       language_id: "",
+      languages: [],
+      source: "",
       user: this.props.user
     };
+  }
+
+  componentDidMount() {
+    fetch(server + "/languages")
+      .then(resp => resp.json())
+      .then(languages => this.setState({ languages: languages }));
+    fetch(server + "/features")
+      .then(resp => resp.json())
+      .then(features => this.setState({ features: features }));
   }
 
   onCancel = event => {
@@ -32,8 +44,12 @@ class CodeSampleForm extends React.Component {
     this.setState({ language_id: value });
   };
 
+  onSourceChange = event => {
+    this.setState({ source: event.target.value });
+  };
+
   onSubmit = event => {
-    const { content, feature_id, language_id, user } = this.state;
+    const { content, feature_id, language_id, user, source } = this.state;
 
     // Client Validation
     // Validates non-blanks
@@ -47,12 +63,35 @@ class CodeSampleForm extends React.Component {
       return;
     }
 
-    // Success
-    alert("Yay! Looks good.");
+    // Request object
+    const req = {
+      body: JSON.stringify({
+        content: content,
+        feature_id: feature_id,
+        language_id: language_id,
+        source: source,
+        user_id: user.id
+      }),
+      headers: { 'Content-Type': 'application/json' },
+      method: "post"
+    };
+
+    // Server submit
+    fetch(server + "/code_samples", req)
+      .then(res => {
+        if (res.ok) {
+          this.props.setRoute("start");
+          return;
+        } else {
+          alert("Server submit failed.");
+        }
+      })
+      .catch(err => alert("Doh! Network error."));
+
   };
 
   render() {
-    const language_options = database.languages.map(lang => {
+    const language_options = this.state.languages.map(lang => {
       return (
         <option key={lang.id} value={lang.id}>
           {lang.name}
@@ -60,7 +99,7 @@ class CodeSampleForm extends React.Component {
       );
     });
 
-    const feature_options = database.features.map(feat => {
+    const feature_options = this.state.features.map(feat => {
       return (
         <option key={feat.id} value={feat.id}>
           {feat.name}
@@ -119,6 +158,23 @@ class CodeSampleForm extends React.Component {
                   {feature_options}
                 </select>
               </div>
+              <div className="mt3 night">
+                <label
+                  className="di fw6 lh-copy f6 pa2 white"
+                  htmlFor="source"
+                >
+                  Source
+                </label>
+                <input
+                  autoFocus={true}
+                  className="pa2 input-reset bn measure w-100"
+                  id="source"
+                  name="source"
+                  onChange={this.onSourceChange}
+                  placeholder="credit or source if you didn't write this code"
+                />
+              </div>
+
             </fieldset>
             <div className="ma1">
               <button
