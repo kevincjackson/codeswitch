@@ -72,10 +72,10 @@ class CodeSampleForm extends React.Component {
           this.props.setRoute("start");
           return;
         } else {
-          alert("Server submit failed.");
+          alert("Server code sample submit failed.");
         }
       })
-      .catch(err => alert("Doh! Network error."));
+      .catch(err => alert("Server can't be reached."));
 
   };
 

@@ -40,9 +40,6 @@ const CodeSample = ({ codeSample, feature, language }) => {
 
   return (
     <div className="pa3">
-      <h3>
-        {language} {feature}
-      </h3>
       <pre>
         <code>{codeSample.content}</code>
       </pre>

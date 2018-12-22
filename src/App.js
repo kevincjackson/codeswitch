@@ -29,11 +29,11 @@ class App extends Component {
     fetch(server + "/languages")
       .then(resp => resp.json())
       .then(languages => this.setState({ languages: languages }))
-      .catch(err => alert("Network error: couldn't retrieve languages."));
+      .catch(err => alert("Server couldn't retrieve languages."));
     fetch(server + "/features")
       .then(resp => resp.json())
       .then(features => this.setState({ features: features }))
-      .catch(err => alert("Network Error: couldn't retrieve features."));
+      .catch(err => alert("Server couldn't retrieve features."));
   }
 
   getContent = () => {

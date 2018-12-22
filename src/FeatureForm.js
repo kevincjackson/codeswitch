@@ -29,19 +29,16 @@ class FeatureForm extends React.Component {
 
     // Validate user
     if (!user) {
-      alert("Ooop! Please sign in or sign up first.")
+      alert("Ooops! Please sign in or sign up first.");
       return;
     }
 
-    // Request object
-    const req = {
+    // Server submit
+    fetch(server + "/features", {
       body: JSON.stringify({ name: name }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       method: "post"
-    };
-
-    // Authenticate
-    fetch(server + "/features", req)
+    })
       .then(res => res.json())
       .then(feat => {
         if (feat.id) {
@@ -51,8 +48,7 @@ class FeatureForm extends React.Component {
         }
         return;
       })
-      .catch(err => alert("Doh! Network error."));
-
+      .catch(err => alert("Server can't be reached."));
 
     // Success
     this.props.setRoute("start");
@@ -63,7 +59,10 @@ class FeatureForm extends React.Component {
       <div>
         <main className="pa4 black-80">
           <div className="measure-wide center">
-            <fieldset id="code-sample-form" className="ba b--transparent ph0 mh0">
+            <fieldset
+              id="code-sample-form"
+              className="ba b--transparent ph0 mh0"
+            >
               <h1 className="night">new feature</h1>
               <div className="mt3 night">
                 <input
