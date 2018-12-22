@@ -25,21 +25,18 @@ class SignIn extends React.Component {
       return;
     }
 
-    // Request object
-    const req = {
+    // Server Submit
+    fetch(server + "/signin", {
       body: JSON.stringify(this.state),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       method: "post"
-    };
-
-    // Authenticate
-    fetch(server + "/signin", req)
+    })
       .then(res => res.json())
       .then(user => {
         if (user.id) {
           this.props.setUser(user);
         } else {
-          alert("Ooops! Login failed.")
+          alert("Ooops! Login failed.");
         }
         return;
       })

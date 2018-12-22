@@ -45,15 +45,12 @@ class SignUp extends Component {
       return;
     }
 
-    // Request object
-    const req = {
+    // Server validation
+    fetch(server + "/signup", {
       body: JSON.stringify(this.state),
       headers: { 'Content-Type': 'application/json' },
       method: "post"
-    };
-
-    // Server validation
-    fetch(server + "/signup", req)
+    })
       .then(res => res.json())
       .then(user => {
         if (user.id) {

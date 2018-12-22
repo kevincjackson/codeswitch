@@ -4,51 +4,58 @@ import FeatureForm from "./FeatureForm";
 import LanguageForm from "./LanguageForm";
 import Header from "./Header";
 import React, { Component } from "react";
-import Search from "./Search";
+import SearchResults from "./SearchResults";
 import Start from "./Start";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import database from "./database";
+const server = "http://localhost:3000";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       errors: [],
+      features: [],
       feature_ids: [],
+      languages: [],
       language_ids: [],
       last_route: "start",
       route: "start",
-      user: database.users[0]
+      user: null
     };
+  }
+
+  componentDidMount() {
+    fetch(server + "/languages")
+      .then(resp => resp.json())
+      .then(languages => this.setState({ languages: languages }))
+      .catch(err => alert("Network error: couldn't retrieve languages."));
+    fetch(server + "/features")
+      .then(resp => resp.json())
+      .then(features => this.setState({ features: features }))
+      .catch(err => alert("Network Error: couldn't retrieve features."));
   }
 
   getContent = () => {
     if (this.state.route === "codeSampleForm") {
       return (
         <CodeSampleForm
+          features={this.state.features}
+          languages={this.state.languages}
           setRoute={this.setRoute}
           user={this.state.user}
         />
       );
     } else if (this.state.route === "featureForm") {
-      return (
-        <FeatureForm
-          setRoute={this.setRoute}
-          user={this.state.user}
-        />
-      );
+      return <FeatureForm setRoute={this.setRoute} user={this.state.user} />;
     } else if (this.state.route === "languageForm") {
-      return (
-        <LanguageForm
-          setRoute={this.setRoute}
-          user={this.state.user}
-        />
-      );
+      return <LanguageForm setRoute={this.setRoute} user={this.state.user} />;
     } else if (this.state.route === "start") {
       return (
         <Start
+          features={this.state.features}
           feature_ids={this.state.feature_ids}
+          languages={this.state.languages}
           language_ids={this.state.language_ids}
           setSearch={this.setSearch}
         />
@@ -56,11 +63,13 @@ class App extends Component {
     } else if (this.state.route === "signin") {
       return <SignIn setUser={this.setUser} setRoute={this.setRoute} />;
     } else if (this.state.route === "signup") {
-      return <SignUp setUser={this.setUser}/>;
+      return <SignUp setUser={this.setUser} />;
     } else if (this.state.route === "search") {
       return (
-        <Search
+        <SearchResults
+          features={this.state.features}
           feature_ids={this.state.feature_ids}
+          languages={this.state.languages}
           language_ids={this.state.language_ids}
           setSearch={this.setSearch}
         />
@@ -72,8 +81,7 @@ class App extends Component {
 
   onHomeClick = () => {
     this.setState({
-      route: "start",
-      results: []
+      route: "start"
     });
   };
 

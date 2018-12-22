@@ -1,25 +1,34 @@
 import React, { Component } from "react";
-const server = "http://localhost:3000";
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       feature_ids: props.feature_ids,
-      features: [],
-      language_ids: props.language_ids,
-      languages: []
+      language_ids: props.language_ids
     };
   }
 
-  componentDidMount() {
-    fetch(server + "/languages")
-      .then(resp => resp.json())
-      .then(languages => this.setState({ languages: languages }));
-    fetch(server + "/features")
-      .then(resp => resp.json())
-      .then(features => this.setState({ features: features }));
-  }
+  get_language_options = () => {
+    return this.props.languages.map(lang => {
+      return (
+        <option key={lang.id} value={lang.id}>
+          {lang.name}
+        </option>
+      );
+    });
+  };
+
+  get_feature_options = () => {
+    return this.props.features.map(feat => {
+      return (
+        <option key={feat.id} value={feat.id}>
+          {feat.name}
+        </option>
+      );
+    });
+  };
+
 
   onFeatureChange = () => {
     const element = document.getElementsByName("feature_ids")[0];
@@ -46,22 +55,6 @@ class SearchBar extends Component {
   };
 
   render() {
-    const language_options = this.state.languages.map(lang => {
-      return (
-        <option key={lang.id} value={lang.id}>
-          {lang.name}
-        </option>
-      );
-    });
-
-    const feature_options = this.state.features.map(feat => {
-      return (
-        <option key={feat.id} value={feat.id}>
-          {feat.name}
-        </option>
-      );
-    });
-
     return (
       <div>
         <select
@@ -72,7 +65,7 @@ class SearchBar extends Component {
           size="3"
           value={this.state.language_ids}
         >
-          {language_options}
+          {this.get_language_options()}
         </select>
 
         <select
@@ -83,7 +76,7 @@ class SearchBar extends Component {
           size="3"
           value={this.state.feature_ids}
         >
-          {feature_options}
+          {this.get_feature_options()}
         </select>
 
         <button

@@ -29,19 +29,16 @@ class LanguageForm extends React.Component {
 
     // Validate user
     if (!user) {
-      alert("Ooop! Please sign in or sign up first.")
+      alert("Ooop! Please sign in or sign up first.");
       return;
     }
 
-    // Request object
-    const req = {
+    // Server submit
+    fetch(server + "/languages", {
       body: JSON.stringify({ name: name }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       method: "post"
-    };
-
-    // Authenticate
-    fetch(server + "/languages", req)
+    })
       .then(res => res.json())
       .then(lang => {
         if (lang.id) {
@@ -53,7 +50,6 @@ class LanguageForm extends React.Component {
       })
       .catch(err => alert("Doh! Network error."));
 
-
     // Success
     this.props.setRoute("start");
   };
@@ -63,7 +59,10 @@ class LanguageForm extends React.Component {
       <div>
         <main className="pa4 black-80">
           <div className="measure-wide center">
-            <fieldset id="code-sample-form" className="ba b--transparent ph0 mh0">
+            <fieldset
+              id="code-sample-form"
+              className="ba b--transparent ph0 mh0"
+            >
               <h1 className="night">new language</h1>
               <div className="mt3 night">
                 <input
