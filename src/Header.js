@@ -44,7 +44,7 @@ const Header = ({ setUser, onHomeClick, setRoute, user }) => {
   const signInLink = () => {
     return (
       <button
-        className="f4 dim dib link grow night underline"
+        className="bn f4 dim dib link grow night underline"
         onClick={() => {
           setRoute("signin");
         }}

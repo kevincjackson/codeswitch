@@ -71,7 +71,9 @@ class App extends Component {
           feature_ids={this.state.feature_ids}
           languages={this.state.languages}
           language_ids={this.state.language_ids}
+          setRoute={this.setRoute}
           setSearch={this.setSearch}
+          user={this.state.user}
         />
       );
     } else {

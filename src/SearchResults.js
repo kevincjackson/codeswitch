@@ -7,7 +7,9 @@ const SearchResults = ({
   feature_ids,
   languages,
   language_ids,
-  setSearch
+  setRoute,
+  setSearch,
+  user
 }) => {
   return (
     <div>
@@ -23,6 +25,8 @@ const SearchResults = ({
         feature_ids={feature_ids}
         languages={languages}
         language_ids={language_ids}
+        setRoute={setRoute}
+        user={user}
       />
     </div>
   );

@@ -74,6 +74,8 @@ class Results extends Component {
               feature={group.feature}
               language={group.language}
               code_samples={group.code_samples}
+              setRoute={this.props.setRoute}
+              user={this.props.user}
             />
           );
         })}
