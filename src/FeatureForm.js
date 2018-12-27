@@ -1,5 +1,4 @@
 import React from "react";
-const server = "http://localhost:3000";
 
 class FeatureForm extends React.Component {
   constructor(props) {
@@ -18,41 +17,7 @@ class FeatureForm extends React.Component {
     this.setState({ name: event.target.value });
   };
 
-  onSubmit = event => {
-    const { name, user } = this.state;
-
-    // Client Validation
-    // Validates non-blanks
-    if (!name) {
-      return;
-    }
-
-    // Validate user
-    if (!user) {
-      alert("Ooops! Please sign in or sign up first.");
-      return;
-    }
-
-    // Server submit
-    fetch(server + "/features", {
-      body: JSON.stringify({ name: name }),
-      headers: { "Content-Type": "application/json" },
-      method: "post"
-    })
-      .then(res => res.json())
-      .then(feat => {
-        if (feat.id) {
-          this.props.setRoute("start");
-        } else {
-          alert("Ooops! Bad request.");
-        }
-        return;
-      })
-      .catch(err => alert("Server can't be reached."));
-
-    // Success
-    this.props.setRoute("start");
-  };
+  onSubmit = () => this.props.onFeatureSubmit(this.state.name, this.state.user);
 
   render() {
     return (

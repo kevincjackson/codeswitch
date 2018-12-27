@@ -6,7 +6,7 @@ class Results extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
     };
   }
 
@@ -76,6 +76,7 @@ class Results extends Component {
               code_samples={group.code_samples}
               setRoute={this.props.setRoute}
               user={this.props.user}
+              usernames={this.props.usernames}
             />
           );
         })}

@@ -4,6 +4,7 @@ const server = "http://localhost:3000";
 class VoteForm extends React.Component {
   constructor(props) {
     super(props);
+    this.ref = React.createRef();
     this.state = {
       correctness: "novote",
       design: "novote",
@@ -12,7 +13,10 @@ class VoteForm extends React.Component {
   }
 
   componentDidMount() {
-  };
+    this.ref.current.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
 
   onCancel = this.props.hideVoteForm;
 
@@ -30,7 +34,7 @@ class VoteForm extends React.Component {
 
   onSubmit = event => {
     const { correctness, design, style } = this.state;
-    const { cs_id, fetchCodeSample, hideVoteForm, user_id } = this.props;
+    const { cs_id, hideVoteForm, resetCodeSample, user_id } = this.props;
 
     // Client Validation
     // Validates non-blanks
@@ -58,7 +62,7 @@ class VoteForm extends React.Component {
     })
       .then(res => {
         if (res.ok) {
-          fetchCodeSample();
+          resetCodeSample();
           hideVoteForm();
         } else {
           alert("Vote submit failed.");
@@ -69,12 +73,12 @@ class VoteForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div ref={this.ref}>
         <main className="pa4 black-80">
           <div className="measure-wide center">
             <fieldset id="vote-form" className="ba b--transparent ph0 mh0">
               <h1 className="night">vote</h1>
-              <div className="white">
+              <div className="mb5 white">
                 <h2 className="white">Correctness</h2>
                 <label className="db ma3 white-50">
                   The code sample works.
@@ -104,7 +108,7 @@ class VoteForm extends React.Component {
                 Downvote
                 <br />
               </div>
-              <div className="white">
+              <div className="mb5 white">
                 <h2 className="white">Design</h2>
                 <label className="db ma3 white-50">
                   The code sample indicates when it should be used. It is
@@ -139,7 +143,7 @@ class VoteForm extends React.Component {
                 Downvote
                 <br />
               </div>
-              <div className="white">
+              <div className="mb5 white">
                 <h2 className="white">Style</h2>
                 <label className="db ma3 white-50">
                   The code sample shows good punctuation, spacing and syntax. It

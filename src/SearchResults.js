@@ -9,7 +9,8 @@ const SearchResults = ({
   language_ids,
   setRoute,
   setSearch,
-  user
+  user,
+  usernames
 }) => {
   return (
     <div>
@@ -27,6 +28,7 @@ const SearchResults = ({
         language_ids={language_ids}
         setRoute={setRoute}
         user={user}
+        usernames={usernames}
       />
     </div>
   );

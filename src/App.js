@@ -21,19 +21,46 @@ class App extends Component {
       language_ids: [],
       last_route: "start",
       route: "start",
-      user: null
+      user: null,
+      usernames: []
     };
   }
 
   componentDidMount() {
-    fetch(server + "/languages")
-      .then(resp => resp.json())
-      .then(languages => this.setState({ languages: languages }))
-      .catch(err => alert("Server couldn't retrieve languages."));
+    this.fetchLanguages();
+    this.fetchFeatures();
+    this.fetchUsernames();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.languages.length !== prevState.languages.length) {
+      this.fetchLanguages();
+    }
+    if (this.state.features.length !== prevState.features.length) {
+      this.fetchFeatures();
+    }
+  };
+
+
+  fetchFeatures() {
     fetch(server + "/features")
       .then(resp => resp.json())
       .then(features => this.setState({ features: features }))
       .catch(err => alert("Server couldn't retrieve features."));
+  }
+
+  fetchLanguages() {
+    fetch(server + "/languages")
+      .then(resp => resp.json())
+      .then(languages => this.setState({ languages: languages }))
+      .catch(err => alert("Server couldn't retrieve languages."));
+  }
+
+  fetchUsernames() {
+    fetch(server + "/usernames")
+      .then(resp => resp.json())
+      .then(usernames => this.setState({ usernames: usernames }))
+      .catch(err => alert("Server couldn't usernames."));
   }
 
   getContent = () => {
@@ -47,9 +74,21 @@ class App extends Component {
         />
       );
     } else if (this.state.route === "featureForm") {
-      return <FeatureForm setRoute={this.setRoute} user={this.state.user} />;
+      return (
+        <FeatureForm
+          onFeatureSubmit={this.onFeatureSubmit}
+          setRoute={this.setRoute}
+          user={this.state.user}
+        />
+      );
     } else if (this.state.route === "languageForm") {
-      return <LanguageForm setRoute={this.setRoute} user={this.state.user} />;
+      return (
+        <LanguageForm
+          onLanguageSubmit={this.onLanguageSubmit}
+          setRoute={this.setRoute}
+          user={this.state.user}
+        />
+      );
     } else if (this.state.route === "start") {
       return (
         <Start
@@ -74,6 +113,7 @@ class App extends Component {
           setRoute={this.setRoute}
           setSearch={this.setSearch}
           user={this.state.user}
+          usernames={this.state.usernames}
         />
       );
     } else {
@@ -87,6 +127,67 @@ class App extends Component {
     });
   };
 
+  onLanguageSubmit = (name, user) => {
+    // Client Validation
+    // Validates non-blanks
+    if (!name) {
+      return;
+    }
+
+    // Validate user
+    if (!user) {
+      alert("Ooops! Please sign in or sign up first.");
+      return;
+    }
+
+    // Server submit
+    fetch(server + "/languages", {
+      body: JSON.stringify({ name: name }),
+      headers: { "Content-Type": "application/json" },
+      method: "post"
+    })
+      .then(res => res.json())
+      .then(lang => {
+        if (lang.id) {
+          this.setState({ languages: [] });
+          this.setRoute("start");
+        } else {
+          alert("Ooops! Server couldn't post new language.");
+        }
+      })
+      .catch(err => alert("Server can't be reached."));
+  };
+
+  onFeatureSubmit = (name, user) => {
+    // Client Validation
+    // Validates non-blanks
+    if (!name) {
+      return;
+    }
+
+    // Validate user
+    if (!user) {
+      alert("Ooops! Please sign in or sign up first.");
+      return;
+    }
+
+    // Server submit
+    fetch(server + "/features", {
+      body: JSON.stringify({ name: name }),
+      headers: { "Content-Type": "application/json" },
+      method: "post"
+    })
+      .then(res => res.json())
+      .then(feat => {
+        if (feat.id) {
+          this.setState({ features: [] });
+          this.setRoute("start");
+        } else {
+          alert("Ooops! Server couldn't post new feature.");
+        }
+      })
+      .catch(err => alert("Server can't be reached."));
+  };
   setRoute = route => {
     this.setState({
       last_route: this.state.route,

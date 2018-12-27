@@ -6,17 +6,20 @@ class CodeSample extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cs_id: this.props.initialCodeSample.id,
       codeSample: this.props.initialCodeSample,
       voteFormIsVisible: false
     };
   }
 
-  fetchCodeSample = () => {
-    fetch(server + "/code_samples/" + this.state.codeSample.id)
-      .then(resp => resp.json())
-      .then(cs => this.setState({ codeSample: cs }))
-      .catch(err => alert("Server error: couldn't update code sample."))
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.codeSample) {
+      fetch(server + "/code_samples/" + this.state.cs_id)
+        .then(resp => resp.json())
+        .then(cs => this.setState({ codeSample: cs }))
+        .catch(err => alert("Server error: couldn't reload code sample."));
+    }
+  }
 
   getCorrectnessVotes = () => {
     const { codeSample } = this.state;
@@ -60,94 +63,98 @@ class CodeSample extends Component {
     this.setState({ voteFormIsVisible: false });
   };
 
-  showVoteForm = () => {
+  onVoteClick = () => {
+    const new_state = !this.state.voteFormIsVisible;
     const { user } = this.props;
-    if (!user) {
-      alert("Please sign in to vote.");
+    if (new_state === false) {
+      this.setState({ voteFormIsVisible: false });
     } else {
-      this.setState({ voteFormIsVisible: true });
+      if (user) {
+        this.setState({ voteFormIsVisible: true });
+      } else {
+        alert("Please sign in to vote.");
+        this.setState({ voteFormIsVisible: false });
+      }
     }
   };
 
+  resetCodeSample = () => {
+    this.setState({ codeSample: null });
+  };
+
   render() {
-    const { user } = this.props;
-    const { codeSample } = this.state;
+    const { user, username } = this.props;
+    const { codeSample, voteFormIsVisible } = this.state;
     let maybeVoteForm;
-    if (this.state.voteFormIsVisible) {
+    if (voteFormIsVisible && codeSample) {
       maybeVoteForm = (
         <VoteForm
           user_id={user.id}
           cs_id={codeSample.id}
-          fetchCodeSample={this.fetchCodeSample}
           hideVoteForm={this.hideVoteForm}
+          resetCodeSample={this.resetCodeSample}
         />
       );
     } else {
       maybeVoteForm = null;
     }
-    return (
-      <div className="pa3">
-        <pre>
-          <code>{codeSample.content}</code>
-        </pre>
-        <div className="flex justify-between">
-          <div className="measure-narrow">
-            <div className="flex justify-between">
-              <div className="mr1">
-                <span
-                  aria-label="upvote"
-                  className="f5"
-                  role="img"
-                  title="upvote"
-                >
-                  &#9650;
-                </span>
-                <span className="f5">{this.getUpvotes()}</span>
-              </div>
-              <div className="mr1">
-                <span
-                  aria-label="downvote"
-                  className="f5"
-                  role="img"
-                  title="downvote"
-                >
-                  &#9660;
-                </span>
-                <span className="f5">{this.getDownvotes()}</span>
-              </div>
-              <div className="mr1">
-                <span aria-label="Correctness" role="img" title="Correctness">
-                  &#10003;
-                </span>
-                <span>{this.getCorrectnessVotes()}</span>
-              </div>
-              <div className="mr1">
-                <span aria-label="Design" role="img" title="Design">
-                  &#128208;
-                </span>
-                <span>{this.getDesignVotes()}</span>
-              </div>
-              <div className="mr1">
-                <span className="stylized-cursive" title="Style">
-                  S
-                </span>
-                <span>{this.getStyleVotes()}</span>
-              </div>
-              <div className="mr1">
-                <button
-                  className="bn dim dib f6 link grow night underline"
-                  onClick={this.showVoteForm}
-                >
-                  vote
-                </button>
+    if (codeSample) {
+      return (
+        <div className="pa3">
+          <pre>
+            <code>{codeSample.content}</code>
+          </pre>
+          <div className="flex justify-between">
+            <div className="measure-narrow">
+              <div className="flex justify-between">
+                <div className="dib mr3">
+                  <span aria-label="upvote" role="img" title="upvote">
+                    &#9650;
+                  </span>
+                  <span>{this.getUpvotes()}</span>
+                </div>
+                <div className="dib mr3">
+                  <span aria-label="downvote" role="img" title="downvote">
+                    &#9660;
+                  </span>
+                  <span>{this.getDownvotes()}</span>
+                </div>
+                <div className="mr3">
+                  <span aria-label="Correctness" role="img" title="Correctness">
+                    &#10003;
+                  </span>
+                  <span>{this.getCorrectnessVotes()}</span>
+                </div>
+                <div className="mr3">
+                  <span aria-label="Design" role="img" title="Design">
+                    &#128208;
+                  </span>
+                  <span>{this.getDesignVotes()}</span>
+                </div>
+                <div className="mr3">
+                  <span className="stylized-cursive" title="Style">
+                    S
+                  </span>
+                  <span>{this.getStyleVotes()}</span>
+                </div>
+                <div className="mr3">
+                  <button
+                    className="bn dim dib f6 link grow night underline"
+                    onClick={this.onVoteClick}
+                  >
+                    vote
+                  </button>
+                </div>
               </div>
             </div>
+            <div>{username}</div>
           </div>
-          <div>w00tw00t</div>
+          {maybeVoteForm}
         </div>
-        {maybeVoteForm}
-      </div>
-    );
+      );
+    } else {
+      return <div>Reloading code sample.</div>;
+    }
   }
 }
 
