@@ -1,5 +1,5 @@
 import React from "react";
-import CodeSample from "./CodeSample";
+import CodeSample from "../containers/CodeSample";
 
 const LanguageFeatureGroup = ({
   code_samples,

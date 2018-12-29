@@ -1,6 +1,6 @@
 import Description from "./Description";
 import React from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../containers/SearchBar";
 
 const Start = ({ features, languages, setSearch }) => {
   return (

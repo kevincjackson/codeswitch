@@ -1,4 +1,4 @@
-import LanguageFeatureGroup from "./LanguageFeatureGroup";
+import LanguageFeatureGroup from "../components/LanguageFeatureGroup";
 import React, { Component } from "react";
 const server = "http://localhost:3000";
 

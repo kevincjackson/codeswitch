@@ -1,6 +1,6 @@
 import React from "react";
-import Results from "./Results";
-import SearchBar from "./SearchBar";
+import Results from "../containers/Results";
+import SearchBar from "../containers/SearchBar";
 
 const SearchResults = ({
   features,

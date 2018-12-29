@@ -4,8 +4,7 @@ class LanguageForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      user: this.props.user
+      name: ""
     };
   }
 
@@ -18,7 +17,7 @@ class LanguageForm extends React.Component {
   };
 
   onSubmit = () =>
-    this.props.onLanguageSubmit(this.state.name, this.state.user);
+    this.props.onLanguageSubmit(this.state.name, this.props.user);
 
   render() {
     return (
