@@ -5,6 +5,7 @@ class FeatureForm extends React.Component {
     super(props);
     this.state = {
       name: "",
+      description: "",
       user: this.props.user
     };
   }
@@ -17,7 +18,16 @@ class FeatureForm extends React.Component {
     this.setState({ name: event.target.value });
   };
 
-  onSubmit = () => this.props.onFeatureSubmit(this.state.name, this.state.user);
+  onDescriptionChange = event => {
+    this.setState({ description: event.target.value });
+  };
+
+  onSubmit = () =>
+    this.props.onFeatureSubmit(
+      this.state.name,
+      this.state.description,
+      this.state.user
+    );
 
   render() {
     return (
@@ -37,6 +47,15 @@ class FeatureForm extends React.Component {
                   name="name"
                   onChange={this.onNameChange}
                   placeholder="name of new feature"
+                />
+              </div>
+              <div className="mt3 night">
+                <input
+                  className="pa2 input-reset bn w-100"
+                  id="description"
+                  name="description"
+                  onChange={this.onDescriptionChange}
+                  placeholder="description of feature"
                 />
               </div>
             </fieldset>

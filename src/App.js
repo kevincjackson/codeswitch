@@ -158,10 +158,10 @@ class App extends Component {
       .catch(err => alert("Server can't be reached."));
   };
 
-  onFeatureSubmit = (name, user) => {
+  onFeatureSubmit = (name, description, user) => {
     // Client Validation
     // Validates non-blanks
-    if (!name) {
+    if (!name || !description) {
       return;
     }
 
@@ -173,7 +173,7 @@ class App extends Component {
 
     // Server submit
     fetch(server + "/features", {
-      body: JSON.stringify({ name: name }),
+      body: JSON.stringify({ name, description }),
       headers: { "Content-Type": "application/json" },
       method: "post"
     })
