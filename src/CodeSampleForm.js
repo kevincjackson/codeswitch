@@ -23,13 +23,13 @@ class CodeSampleForm extends React.Component {
 
   onFeatureChange = event => {
     const element = document.getElementsByName("featureSelector")[0];
-    const value = Array.from(element.selectedOptions).map(v => v.value);
+    const value = Array.from(element.selectedOptions).map(v => v.value)[0];
     this.setState({ feature_id: value });
   };
 
   onLanguageChange = event => {
     const element = document.getElementsByName("languageSelector")[0];
-    const value = Array.from(element.selectedOptions).map(v => v.value);
+    const value = Array.from(element.selectedOptions).map(v => v.value)[0];
     this.setState({ language_id: value });
   };
 
@@ -52,8 +52,8 @@ class CodeSampleForm extends React.Component {
       return;
     }
 
-    // Request object
-    const req = {
+    // Server submit
+    fetch(server + "/code_samples", {
       body: JSON.stringify({
         content: content,
         feature_id: feature_id,
@@ -63,16 +63,13 @@ class CodeSampleForm extends React.Component {
       }),
       headers: { 'Content-Type': 'application/json' },
       method: "post"
-    };
-
-    // Server submit
-    fetch(server + "/code_samples", req)
+    })
       .then(res => {
         if (res.ok) {
           this.props.setRoute("start");
           return;
         } else {
-          alert("Server code sample submit failed.");
+          alert("Server couldn't add code sample.");
         }
       })
       .catch(err => alert("Server can't be reached."));
