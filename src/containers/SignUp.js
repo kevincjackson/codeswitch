@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-const server = "http://localhost:3000";
 
 class SignUp extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class SignUp extends Component {
     }
 
     // Server validation
-    fetch(server + "/signup", {
+    fetch(process.env.REACT_APP_SERVER + "/signup", {
       body: JSON.stringify(this.state),
       headers: { 'Content-Type': 'application/json' },
       method: "post"

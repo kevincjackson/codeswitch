@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import VoteForm from "./VoteForm";
-const server = "http://localhost:3000";
 
 class CodeSample extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class CodeSample extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!this.state.codeSample) {
-      fetch(server + "/code_samples/" + this.state.cs_id)
+      fetch(process.env.REACT_APP_SERVER + "/code_samples/" + this.state.cs_id)
         .then(resp => resp.json())
         .then(cs => this.setState({ codeSample: cs }))
         .catch(err => alert("Server error: couldn't reload code sample."));

@@ -1,5 +1,4 @@
 import React from "react";
-const server = "http://localhost:3000";
 
 class VoteForm extends React.Component {
   constructor(props) {
@@ -49,7 +48,7 @@ class VoteForm extends React.Component {
     }
 
     // Server submit
-    fetch(server + "/vote", {
+    fetch(process.env.REACT_APP_SERVER + "/vote", {
       body: JSON.stringify({
         correctness,
         cs_id,

@@ -8,7 +8,6 @@ import SearchResults from "../components/SearchResults";
 import Start from "../components/Start";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-const server = "http://localhost:3000";
 
 class App extends Component {
   constructor() {
@@ -43,21 +42,21 @@ class App extends Component {
 
 
   fetchFeatures() {
-    fetch(server + "/features")
+    fetch(process.env.REACT_APP_SERVER + "/features")
       .then(resp => resp.json())
       .then(features => this.setState({ features: features }))
       .catch(err => alert("Server couldn't retrieve features."));
   }
 
   fetchLanguages() {
-    fetch(server + "/languages")
+    fetch(process.env.REACT_APP_SERVER + "/languages")
       .then(resp => resp.json())
       .then(languages => this.setState({ languages: languages }))
       .catch(err => alert("Server couldn't retrieve languages."));
   }
 
   fetchUsernames() {
-    fetch(server + "/usernames")
+    fetch(process.env.REACT_APP_SERVER + "/usernames")
       .then(resp => resp.json())
       .then(usernames => this.setState({ usernames: usernames }))
       .catch(err => alert("Server couldn't usernames."));
@@ -141,7 +140,7 @@ class App extends Component {
     }
 
     // Server submit
-    fetch(server + "/languages", {
+    fetch(process.env.REACT_APP_SERVER + "/languages", {
       body: JSON.stringify({ name: name }),
       headers: { "Content-Type": "application/json" },
       method: "post"
@@ -172,7 +171,7 @@ class App extends Component {
     }
 
     // Server submit
-    fetch(server + "/features", {
+    fetch(process.env.REACT_APP_SERVER + "/features", {
       body: JSON.stringify({ name, description }),
       headers: { "Content-Type": "application/json" },
       method: "post"

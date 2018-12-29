@@ -1,5 +1,4 @@
 import React from "react";
-const server = "http://localhost:3000";
 
 class CodeSampleForm extends React.Component {
   constructor(props) {
@@ -53,7 +52,7 @@ class CodeSampleForm extends React.Component {
     }
 
     // Server submit
-    fetch(server + "/code_samples", {
+    fetch(process.env.REACT_APP_SERVER + "/code_samples", {
       body: JSON.stringify({
         content: content,
         feature_id: feature_id,

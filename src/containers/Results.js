@@ -1,6 +1,5 @@
 import LanguageFeatureGroup from "../components/LanguageFeatureGroup";
 import React, { Component } from "react";
-const server = "http://localhost:3000";
 
 class Results extends Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class Results extends Component {
   }
 
   fetchResults(feature_ids, language_ids) {
-    fetch(server + "/code_samples/search", {
+    fetch(process.env.REACT_APP_SERVER + "/code_samples/search", {
       body: JSON.stringify({ feature_ids, language_ids }),
       headers: { "Content-Type": "application/json" },
       method: "post"

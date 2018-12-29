@@ -1,5 +1,4 @@
 import React from "react";
-const server = "http://localhost:3000";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class SignIn extends React.Component {
     }
 
     // Server Submit
-    fetch(server + "/signin", {
+    fetch(process.env.REACT_APP_SERVER + "/signin", {
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" },
       method: "post"
