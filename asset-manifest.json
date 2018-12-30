@@ -1,15 +1,15 @@
 {
   "main.css": "/codeswitch/static/css/main.efa38bee.chunk.css",
-  "main.js": "/codeswitch/static/js/main.c4261b81.chunk.js",
-  "main.js.map": "/codeswitch/static/js/main.c4261b81.chunk.js.map",
+  "main.js": "/codeswitch/static/js/main.46b4281e.chunk.js",
+  "main.js.map": "/codeswitch/static/js/main.46b4281e.chunk.js.map",
   "static/css/1.486b04ba.chunk.css": "/codeswitch/static/css/1.486b04ba.chunk.css",
   "static/js/1.5638f9a6.chunk.js": "/codeswitch/static/js/1.5638f9a6.chunk.js",
   "static/js/1.5638f9a6.chunk.js.map": "/codeswitch/static/js/1.5638f9a6.chunk.js.map",
   "runtime~main.js": "/codeswitch/static/js/runtime~main.8a35e4d9.js",
   "runtime~main.js.map": "/codeswitch/static/js/runtime~main.8a35e4d9.js.map",
-  "static/css/1.486b04ba.chunk.css.map": "/codeswitch/static/css/1.486b04ba.chunk.css.map",
   "static/css/main.efa38bee.chunk.css.map": "/codeswitch/static/css/main.efa38bee.chunk.css.map",
+  "static/css/1.486b04ba.chunk.css.map": "/codeswitch/static/css/1.486b04ba.chunk.css.map",
   "index.html": "/codeswitch/index.html",
-  "precache-manifest.0fe31b4d693cc307a8498affcdd8921d.js": "/codeswitch/precache-manifest.0fe31b4d693cc307a8498affcdd8921d.js",
+  "precache-manifest.57b1cef8714021c2404b6d3859caaadc.js": "/codeswitch/precache-manifest.57b1cef8714021c2404b6d3859caaadc.js",
   "service-worker.js": "/codeswitch/service-worker.js"
 }
