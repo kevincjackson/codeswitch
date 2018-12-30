@@ -9,8 +9,12 @@ A web app for mapping programming languages.
 ## Features
 * Selectable languages.
 * Selectable language features.
-* Fast!
 * Community editable.
+* Rate code based on correctness, design, and style to ensure code quality.
+* Fast!
+
+## Website
+https://kevincjackson.github.io/codeswitch/
 
 ### Author
 Kevin Jackson
